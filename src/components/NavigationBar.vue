@@ -5,6 +5,9 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn text @click="home()">Home</v-btn>
+        <v-btn v-if="user != 'error' && user != null" text @click="dataview()"
+          >Scooter Info</v-btn
+        >
         <v-btn v-if="user != 'error' && user != null" text @click="profile()"
           >My Profile</v-btn
         >
@@ -43,6 +46,9 @@ export default {
     },
     profile() {
       this.$router.push("/profile");
+    },
+    dataview() {
+      this.$router.push("/dataview");
     }
   }
 };

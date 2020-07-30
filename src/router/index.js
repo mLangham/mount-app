@@ -19,6 +19,14 @@ const routes = [
     }
   },
   {
+    path: "/profile/:uid",
+    name: "otherprofile",
+    component: () => import("@/views/Profile.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("@/views/LoginSelection.vue"),
@@ -48,6 +56,14 @@ const routes = [
     component: () => import("@/views/Login.vue"),
     meta: {
       requiresAuth: false
+    }
+  },
+  {
+    path: "/dataview",
+    name: "dataview",
+    component: () => import("@/views/DataView.vue"),
+    meta: {
+      requiresAuth: true
     }
   }
 ];

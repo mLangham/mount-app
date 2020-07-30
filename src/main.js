@@ -17,7 +17,7 @@ var app = null;
  */
 firebase.auth().onAuthStateChanged(async () => {
   if (!app) {
-    if (document.referrer.endsWith("citySignUp")) {
+    if (document.referrer.includes("citySignUp")) {
       await store.dispatch("createCityUser");
       new Vue({
         router,
@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged(async () => {
         vuetify,
         render: h => h(App)
       }).$mount("#app");
-    } else if (document.referrer.endsWith("companySignUp")) {
+    } else if (document.referrer.includes("companySignUp")) {
       await store.dispatch("createCompanyUser");
       new Vue({
         router,

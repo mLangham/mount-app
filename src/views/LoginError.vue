@@ -10,6 +10,7 @@ export default {
     LoginUI
   },
   async mounted() {
+    // logs out user if they receive the loginerror
     await this.$store.dispatch("logOut");
   }
 };

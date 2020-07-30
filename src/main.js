@@ -9,11 +9,16 @@ import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
 
+// initially sets app to null
 var app = null;
+
+/** on user login/logout sets app variable
+ *  sets userType on sign up based on URL (see store)
+ */
 firebase.auth().onAuthStateChanged(async () => {
   if (!app) {
     if (document.referrer.endsWith("citySignUp")) {
-      await store.dispatch("setCity");
+      await store.dispatch("createCityUser");
       new Vue({
         router,
         store,
@@ -21,7 +26,7 @@ firebase.auth().onAuthStateChanged(async () => {
         render: h => h(App)
       }).$mount("#app");
     } else if (document.referrer.endsWith("companySignUp")) {
-      await store.dispatch("setCompany");
+      await store.dispatch("createCompanyUser");
       new Vue({
         router,
         store,
@@ -29,7 +34,7 @@ firebase.auth().onAuthStateChanged(async () => {
         render: h => h(App)
       }).$mount("#app");
     } else {
-      await store.dispatch("setUser");
+      await store.dispatch("loginUser");
       new Vue({
         router,
         store,

@@ -16,17 +16,11 @@ const getters = {
 const mutations = {
   setUser: (state, payload) => {
     state.user = payload;
-  },
-  setCity: (state, payload) => {
-    state.user = payload;
-  },
-  setCompany: (state, payload) => {
-    state.user = payload;
   }
 };
 
 const actions = {
-  setUser: async context => {
+  loginUser: async context => {
     const user = firebase.auth().currentUser;
     if (!user) {
       return;
@@ -34,13 +28,14 @@ const actions = {
     var raid = await functions.httpsCallable("getUserData")({
       uid: user.uid
     });
+    // if user entry doesnt exist, set user to error state
     if (!raid.data) {
       context.commit("setUser", "error");
     } else {
       context.commit("setUser", raid.data);
     }
   },
-  setCity: async context => {
+  createCityUser: async context => {
     const user = firebase.auth().currentUser;
     if (!user) {
       return;
@@ -57,12 +52,12 @@ const actions = {
       raid = await functions.httpsCallable("getUserData")({
         uid: user.uid
       });
-      context.commit("setCity", raid.data);
+      context.commit("setUser", raid.data);
     } else {
-      context.commit("setCity", raid.data);
+      context.commit("setUser", raid.data);
     }
   },
-  setCompany: async context => {
+  createCompanyUser: async context => {
     const user = firebase.auth().currentUser;
     if (!user) {
       return;
@@ -79,9 +74,9 @@ const actions = {
       raid = await functions.httpsCallable("getUserData")({
         uid: user.uid
       });
-      context.commit("setCompany", raid.data);
+      context.commit("setUser", raid.data);
     } else {
-      context.commit("setCompany", raid.data);
+      context.commit("setUser", raid.data);
     }
   },
   getUser: async context => {

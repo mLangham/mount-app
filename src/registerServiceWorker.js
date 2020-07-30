@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === "production") {
       console.log("New content is downloading.");
     },
     updated() {
+      /* Reloads page when server-side update is pushed. */
       console.log("New content is available; please refresh.");
       window.location.reload(true);
     },

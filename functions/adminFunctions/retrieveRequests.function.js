@@ -18,7 +18,7 @@ module.exports.retrieveRequests = functions.https.onCall(
         code: 401
       };
     }
-    if (userData.data().cityName) {
+    if (userData.data().cityName && userData.data().role === "admin") {
       const requests = db
         .collection("approvals")
         .where("cityName", "==", userData.data().cityName);
@@ -35,7 +35,10 @@ module.exports.retrieveRequests = functions.https.onCall(
         });
       });
       return res;
-    } else if (userData.data().companyName) {
+    } else if (
+      userData.data().companyName &&
+      userData.data().role === "admin"
+    ) {
       const requests = db
         .collection("approvals")
         .where("companyName", "==", userData.data().companyName);

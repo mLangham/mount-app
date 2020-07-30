@@ -192,7 +192,7 @@ export default {
           companyName: this.companyName
         });
       }
-      this.$store.dispatch("setUser").then(() => {
+      this.$store.dispatch("getUser").then(() => {
         this.$router.push("/");
       });
     },

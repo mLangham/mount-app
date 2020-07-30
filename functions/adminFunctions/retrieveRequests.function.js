@@ -18,10 +18,10 @@ module.exports.retrieveRequests = functions.https.onCall(
         code: 401
       };
     }
-    if (userData.data().city) {
+    if (userData.data().cityName) {
       const requests = db
         .collection("approvals")
-        .where("cityName", "==", userData.data().city);
+        .where("cityName", "==", userData.data().cityName);
       let reqData = await requests.get();
       let res = [];
       reqData.forEach(element => {
@@ -35,10 +35,10 @@ module.exports.retrieveRequests = functions.https.onCall(
         });
       });
       return res;
-    } else if (userData.data().company) {
+    } else if (userData.data().companyName) {
       const requests = db
         .collection("approvals")
-        .where("companyName", "==", userData.data().company);
+        .where("companyName", "==", userData.data().companyName);
       let reqData = await requests.get();
       let res = [];
       reqData.forEach(element => {
@@ -52,7 +52,7 @@ module.exports.retrieveRequests = functions.https.onCall(
         });
       });
       return res;
-    } else {
+    } else if (userData.data().role === "admin") {
       const requests = db.collection("approvals");
       let reqData = await requests.get();
       let res = [];

@@ -3,7 +3,7 @@ const functions = require("firebase-functions");
 
 const db = admin.firestore();
 
-module.exports.retrieveRequests = functions.https.onCall(
+module.exports.retrieveScooters = functions.https.onCall(
   async (data, context) => {
     if (!context.auth) {
       return { message: "Authentication Required!", code: 401 };
@@ -12,52 +12,65 @@ module.exports.retrieveRequests = functions.https.onCall(
       .collection("users")
       .doc(context.auth.uid)
       .get();
-    if (userData.data().city) {
+    console.log(userData.data());
+    if (userData.data().cityName) {
       const requests = db
         .collection("scooters")
-        .where("cityName", "==", userData.data().city);
+        .where("cityName", "==", userData.data().cityName);
       let reqData = await requests.get();
       let res = [];
       reqData.forEach(element => {
         res.push({
-          toApprove: element.data().toApprove,
-          userName: element.data().userName,
+          avgTripLength: element.data().avgTripLength,
+          batteryLevel: element.data().batteryLevel,
           cityName: element.data().cityName,
           companyName: element.data().companyName,
-          rejected: element.data().rejected,
-          requestID: element.id
+          lat: element.data().lat,
+          long: element.data().long,
+          lockID: element.data().lockID,
+          scooterID: element.data().scooterID,
+          numRides: element.data().numRides,
+          elementID: element.id
         });
       });
       return res;
-    } else if (userData.data().company) {
+    } else if (userData.data().companyName) {
       const requests = db
         .collection("scooters")
-        .where("companyName", "==", userData.data().company);
+        .where("companyName", "==", userData.data().companyName);
       let reqData = await requests.get();
       let res = [];
       reqData.forEach(element => {
         res.push({
-          toApprove: element.data().toApprove,
-          userName: element.data().userName,
+          avgTripLength: element.data().avgTripLength,
+          batteryLevel: element.data().batteryLevel,
           cityName: element.data().cityName,
           companyName: element.data().companyName,
-          rejected: element.data().rejected,
-          requestID: element.id
+          lat: element.data().lat,
+          long: element.data().long,
+          lockID: element.data().lockID,
+          scooterID: element.data().scooterID,
+          numRides: element.data().numRides,
+          elementID: element.id
         });
       });
       return res;
-    } else {
+    } else if (userData.data().role === "admin") {
       const requests = db.collection("scooters");
       let reqData = await requests.get();
       let res = [];
       reqData.forEach(element => {
         res.push({
-          toApprove: element.data().toApprove,
-          userName: element.data().userName,
+          avgTripLength: element.data().avgTripLength,
+          batteryLevel: element.data().batteryLevel,
           cityName: element.data().cityName,
           companyName: element.data().companyName,
-          rejected: element.data().rejected,
-          requestID: element.id
+          lat: element.data().lat,
+          long: element.data().long,
+          lockID: element.data().lockID,
+          scooterID: element.data().scooterID,
+          numRides: element.data().numRides,
+          elementID: element.id
         });
       });
       return res;

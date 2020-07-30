@@ -25,7 +25,7 @@
                 ></v-text-field>
               </v-flex>
             </v-layout>
-            <div v-if="!uid || (role != 'admin' && role != 'rejected')">
+            <div v-if="role != 'admin' && role != 'rejected'">
               <v-layout v-if="role" row>
                 <v-flex xs12>
                   <v-text-field

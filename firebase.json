@@ -12,6 +12,7 @@
     ]
   },
   "hosting": {
+    "site": "mountlocks",
     "public": "dist",
     "ignore": [
       "firebase.json",

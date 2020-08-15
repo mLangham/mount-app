@@ -1,21 +1,34 @@
 <template>
   <div>
-    <v-toolbar>
-      <v-toolbar-title>MountLocks</v-toolbar-title>
+    <v-toolbar color="#333B52">
+      <v-toolbar-title class="white--text">MountLocks</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn text @click="home()">Home</v-btn>
-        <v-btn v-if="user != 'error' && user != null" text @click="dataview()"
+        <v-btn text class="white--text" @click="home()">Home</v-btn>
+        <v-btn
+          v-if="user != 'error' && user != null"
+          text
+          @click="dataview()"
+          class="white--text"
           >Scooter Info</v-btn
         >
-        <v-btn v-if="user != 'error' && user != null" text @click="profile()"
+        <v-btn
+          v-if="user != 'error' && user != null"
+          text
+          @click="profile()"
+          class="white--text"
           >My Profile</v-btn
         >
         <v-btn icon>
-          <v-icon v-if="user != 'error' && user != null" @click="signOut()"
+          <v-icon
+            v-if="user != 'error' && user != null"
+            @click="signOut()"
+            class="white--text"
             >mdi-export-variant</v-icon
           >
-          <v-icon v-else @click="signIn()">mdi-arrow-right</v-icon>
+          <v-icon color="white" v-else @click="signIn()"
+            >mdi-arrow-right</v-icon
+          >
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>

@@ -1,10 +1,18 @@
 <template>
-  <v-layout align-center justify-center>
+  <v-layout align-center justify-center class="table">
     <v-container>
+      <h1>
+        Scooter and Lock IDs for
+        {{
+          this.$store.state.user.cityName == null
+            ? this.$store.state.user.companyName
+            : this.$store.state.user.cityName
+        }}
+      </h1>
       <v-layout text-center row wrap>
         <v-flex mb-4>
           <template v-if="data != null"
-            ><v-row>
+            ><v-row class="table-search">
               <v-flex mx-1>
                 <v-text-field
                   v-model="search"
@@ -134,3 +142,25 @@ export default {
   }
 };
 </script>
+<style scoped>
+.table {
+  background-image: linear-gradient(
+    225deg,
+    #564f55 0%,
+    #222233 33%,
+    #021112 66%,
+    #000000 100%
+  );
+}
+.table-search {
+  background-color: white;
+  border-radius: 25px;
+  margin-bottom: 20px;
+}
+.elevation-1 {
+  border-radius: 25px;
+}
+h1 {
+  color: white;
+}
+</style>

@@ -1,8 +1,8 @@
 <template>
-  <v-layout align-center justify-center>
+  <v-layout align-center justify-center class="background">
     <v-flex xs12 sm8 md4>
       <v-card class="elevation-12">
-        <v-toolbar dark color="primary">
+        <v-toolbar dark color="#333B52">
           <v-toolbar-title>Profile</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
@@ -214,3 +214,14 @@ export default {
   }
 };
 </script>
+<style scoped>
+.background {
+  background-image: linear-gradient(
+    225deg,
+    #564f55 0%,
+    #222233 33%,
+    #021112 66%,
+    #000000 100%
+  );
+}
+</style>

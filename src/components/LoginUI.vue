@@ -1,6 +1,6 @@
 <template>
-  <v-layout align-center justify-center>
-    <v-card width="400px">
+  <v-layout align-center justify-center class="background">
+    <v-card width="400px" color="#333B52">
       <v-card-title class="justify-center">
         <h3>Log in</h3>
       </v-card-title>
@@ -10,7 +10,7 @@
       <v-card-text>
         <div id="firebaseui-auth-container"></div>
         <div v-if="selection == true">
-          <v-layout justify-center>
+          <v-layout justify-center class="small-text">
             <span>or, sign up as</span>
           </v-layout>
           <br />
@@ -54,3 +54,21 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.background {
+  background-image: linear-gradient(
+    225deg,
+    #564f55 0%,
+    #222233 33%,
+    #021112 66%,
+    #000000 100%
+  );
+}
+h3 {
+  color: white;
+}
+.small-text {
+  color: white;
+}
+</style>

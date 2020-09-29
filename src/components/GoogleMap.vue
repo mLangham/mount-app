@@ -1,23 +1,33 @@
 
 <template>
   <div>
-  
-
+<!--   
+  <div v-if = "markers"> -->
+    
     <gmap-map
       :center="center"
       :zoom="12"
       style="width:93%;  height: 350px; margin:auto;"
     >
+   
+
        <GmapMarker
     :key="index"
     v-for="(m, index) in getMarkers()"
+
     :position="m.position"
     :clickable="true"
     :draggable="true"
     @click="center=m.position"
   />
-    </gmap-map>
+
+   
+</gmap-map>
+
   </div>
+<!-- 
+  </div> -->
+
 </template>
 
 <script>
@@ -72,14 +82,19 @@ async getMarkers(){
     console.log(rawData.data, "first print")
 
     var markers = [];
+    var temp = [];
 
 
     for(let i=0;i<rawData.data.length;i++){
      
-          markers.push({
+          temp.push({
               position:{lat: rawData.data[i].lat, lng: rawData.data[i].long}      
             });  
+            
         }
+
+        markers = temp;
+
         console.log(markers, "these markers")
         return markers;      
     },
@@ -88,10 +103,10 @@ async getMarkers(){
   },
 
 };
+// store into temporary array
+//set temp to markers
 
-
-
-
+// v if (markers)
 
 
 </script>

@@ -8,14 +8,10 @@
               :src="require('../assets/MountLogo.png')"
               class="my-3"
               contain
-              height="200"
+              height="190"
             ></v-img>
           </v-flex>
-          <v-flex mb-4>
-            <h1 class="display-2 font-weight-bold mb-3">
-              Welcome to Mount
-            </h1>
-          </v-flex>
+          
         </v-layout>
       </v-container>
     </div>
@@ -27,16 +23,5 @@ export default {};
 </script>
 
 <style scoped>
-div {
-  background-image: linear-gradient(
-    225deg,
-    #564f55 0%,
-    #222233 33%,
-    #021112 66%,
-    #000000 100%
-  );
-}
-h1 {
-  color: white;
-}
+
 </style>

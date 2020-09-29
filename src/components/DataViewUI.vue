@@ -1,14 +1,14 @@
 <template>
   <v-layout align-center justify-center class="table">
-    <v-container>
-      <h1>
+    <v-container class="pt-16">
+      <!-- <h3>
         Scooter and Lock IDs for
         {{
           this.$store.state.user.cityName == null
             ? this.$store.state.user.companyName
             : this.$store.state.user.cityName
         }}
-      </h1>
+      </h3> -->
       <v-layout text-center row wrap>
         <v-flex mb-4>
           <template v-if="data != null"
@@ -139,28 +139,10 @@ export default {
   async mounted() {
     let rawData = await functions.httpsCallable("retrieveScooters")({});
     this.data = rawData.data;
+    console.log(this.data,"this is his data")
   }
 };
 </script>
 <style scoped>
-.table {
-  background-image: linear-gradient(
-    225deg,
-    #564f55 0%,
-    #222233 33%,
-    #021112 66%,
-    #000000 100%
-  );
-}
-.table-search {
-  background-color: white;
-  border-radius: 25px;
-  margin-bottom: 20px;
-}
-.elevation-1 {
-  border-radius: 25px;
-}
-h1 {
-  color: white;
-}
+
 </style>

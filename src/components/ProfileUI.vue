@@ -60,7 +60,7 @@
               </v-layout>
               <v-btn
                 v-if="!uid && role != 'rejected' && role != 'approved'"
-                color="primary"
+                color="#333B52"
                 @click="requestApproval"
                 >Request Approval</v-btn
               >
@@ -72,8 +72,8 @@
             justify-center
           >
             <v-flex>
-              <v-card class="elevation-12">
-                <v-toolbar dark color="primary">
+              <v-card class="elevation-0">
+                <v-toolbar dark color="#333B52">
                   <v-toolbar-title>Requests</v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
@@ -215,13 +215,4 @@ export default {
 };
 </script>
 <style scoped>
-.background {
-  background-image: linear-gradient(
-    225deg,
-    #564f55 0%,
-    #222233 33%,
-    #021112 66%,
-    #000000 100%
-  );
-}
 </style>

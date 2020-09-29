@@ -1,10 +1,9 @@
 <template>
   <div>
     <v-toolbar color="#333B52">
-      <v-toolbar-title class="white--text">MountLocks</v-toolbar-title>
+        <v-btn text class="white--text" @click="home()">Mount Locks</v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn text class="white--text" @click="home()">Home</v-btn>
         <v-btn
           v-if="user != 'error' && user != null"
           text
@@ -17,17 +16,17 @@
           text
           @click="profile()"
           class="white--text"
-          >My Profile</v-btn
+          >Profile</v-btn
         >
         <v-btn icon>
           <v-icon
             v-if="user != 'error' && user != null"
             @click="signOut()"
             class="white--text"
-            >mdi-export-variant</v-icon
+            >mdi-logout-variant</v-icon
           >
           <v-icon color="white" v-else @click="signIn()"
-            >mdi-arrow-right</v-icon
+            >mdi-login-variant</v-icon
           >
         </v-btn>
       </v-toolbar-items>

@@ -1,20 +1,20 @@
 
 <template>
   <div>
-<!--   
-  <div v-if = "markers"> -->
-    
+  
+  <div v-if = "markers.length > 0">
+      <v-container class="pb-16">
     <gmap-map
       :center="center"
-      :zoom="12"
-      style="width:93%;  height: 350px; margin:auto;"
+      :zoom="10"
+      style=" height: 350px; margin:auto;"
     >
+  
+
+  <GmapMarker 
    
-
-       <GmapMarker
     :key="index"
-    v-for="(m, index) in getMarkers()"
-
+    v-for="(m, index) in markers"
     :position="m.position"
     :clickable="true"
     :draggable="true"
@@ -23,10 +23,11 @@
 
    
 </gmap-map>
+ </v-container>
 
   </div>
-<!-- 
-  </div> -->
+
+  </div>
 
 </template>
 
@@ -38,19 +39,19 @@ export default {
   name: "GoogleMap",
   data() {
 
-
     return {
-      center: { lat: 37.9168362, lng: -122.076972 },
+      center: {lat: 31.52, lng: 49.8},  
       places: [],
       currentPlace: null,
-      data: { lat: 37.9168362, lng: -122.076972 },
+      markers: []
       
     };
   },
 
 
   methods: {
-     geolocate: function() {
+
+  geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
           lat: position.coords.latitude,
@@ -60,54 +61,25 @@ export default {
     },
 
 
-
-
-//   async mounted() {
-//     let rawData = await functions.httpsCallable("retrieveScooters")({});
-//     this.data = rawData.data;
- 
-
-//     console.log(this.data,"this is you raw data")
-//   },
-
-
-
 async getMarkers(){
-
-
-
 
     let rawData = await functions.httpsCallable("retrieveScooters")({});
 
-    console.log(rawData.data, "first print")
-
-    var markers = [];
-    var temp = [];
-
-
     for(let i=0;i<rawData.data.length;i++){
-     
-          temp.push({
+
+          this.markers.push({
               position:{lat: rawData.data[i].lat, lng: rawData.data[i].long}      
-            });  
-            
+            });            
         }
-
-        markers = temp;
-
-        console.log(markers, "these markers")
-        return markers;      
     },
+  },
 
-    
+
+  async mounted() {
+      await this.getMarkers(); 
   },
 
 };
-// store into temporary array
-//set temp to markers
-
-// v if (markers)
-
 
 </script>
 

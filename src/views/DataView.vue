@@ -2,7 +2,7 @@
 <div>
   
   <DataViewUI />
-  <GoogleMap />
+  <!-- <GoogleMap /> -->
 
 
   
@@ -11,17 +11,19 @@
 </template>
 
 <script>
-import GoogleMap from "../components/GoogleMap";
+// import GoogleMap from "../components/GoogleMap";
 import DataViewUI from "../components/DataViewUI";
  
 
 
- 
+
 
 
 export default {
   components: {
-    GoogleMap,
+
+    
+    //GoogleMap,
     DataViewUI,
 
     

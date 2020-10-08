@@ -1,4 +1,8 @@
 <template>
+<div>
+
+
+
   <v-layout align-center justify-center class="table">
     <v-container class="pt-16">
       <!-- <h3>
@@ -60,10 +64,21 @@
       </v-layout>
     </v-container>
   </v-layout>
+
+
+  <GoogleMap/>
+
+
+
+
+  </div>
 </template>
 
 <script>
 import { functions } from "@/firebase/init";
+
+
+import GoogleMap from "../components/GoogleMap";
 
 export default {
   name: "DataViewUI",
@@ -72,8 +87,16 @@ export default {
       return this.$store.state.user;
     }
   },
+
+  components: {   
+    GoogleMap   
+  },
+
+
+
   data() {
     return {
+   
       loader: null,
       search: "",
       data: null,
@@ -129,19 +152,29 @@ export default {
     };
   },
   methods: {
+    
     openMap(item) {
+
+  
+
       window.open(
         `https://maps.google.com/maps?q=${item.lat},${item.long}`,
         "_blank"
-      );
+      ); 
     }
+
+
   },
   async mounted() {
     let rawData = await functions.httpsCallable("retrieveScooters")({});
     this.data = rawData.data;
-    console.log(this.data,"this is his data")
+
+    
+
   }
 };
+
+
 </script>
 <style scoped>
 

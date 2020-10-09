@@ -1,14 +1,18 @@
 <template>
+<div>
+
+
+
   <v-layout align-center justify-center class="table">
-    <v-container>
-      <h1>
+    <v-container class="pt-16">
+      <!-- <h3>
         Scooter and Lock IDs for
         {{
           this.$store.state.user.cityName == null
             ? this.$store.state.user.companyName
             : this.$store.state.user.cityName
         }}
-      </h1>
+      </h3> -->
       <v-layout text-center row wrap>
         <v-flex mb-4>
           <template v-if="data != null"
@@ -60,10 +64,21 @@
       </v-layout>
     </v-container>
   </v-layout>
+
+
+  <GoogleMap/>
+
+
+
+
+  </div>
 </template>
 
 <script>
 import { functions } from "@/firebase/init";
+
+
+import GoogleMap from "../components/GoogleMap";
 
 export default {
   name: "DataViewUI",
@@ -72,8 +87,16 @@ export default {
       return this.$store.state.user;
     }
   },
+
+  components: {   
+    GoogleMap   
+  },
+
+
+
   data() {
     return {
+   
       loader: null,
       search: "",
       data: null,
@@ -129,38 +152,30 @@ export default {
     };
   },
   methods: {
+    
     openMap(item) {
+
+  
+
       window.open(
         `https://maps.google.com/maps?q=${item.lat},${item.long}`,
         "_blank"
-      );
+      ); 
     }
+
+
   },
   async mounted() {
     let rawData = await functions.httpsCallable("retrieveScooters")({});
     this.data = rawData.data;
+
+    
+
   }
 };
+
+
 </script>
 <style scoped>
-.table {
-  background-image: linear-gradient(
-    225deg,
-    #564f55 0%,
-    #222233 33%,
-    #021112 66%,
-    #000000 100%
-  );
-}
-.table-search {
-  background-color: white;
-  border-radius: 25px;
-  margin-bottom: 20px;
-}
-.elevation-1 {
-  border-radius: 25px;
-}
-h1 {
-  color: white;
-}
+
 </style>

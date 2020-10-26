@@ -53,20 +53,31 @@
               :loading="data == null"
               loading-text="Loading please wait ..."
             >
-              <template #item.location="{ item }"
+
+
+             <template #item.location="{ item }"
+            
+
                 ><button>
-                  <a @click="openMap(item)" target="_blank">Open</a>
+                 <!-- <a @click="openMap(item)" target="_blank">Open</a> -->
+
+                  <a @click="recenter(item)">Zoom</a>
+
+
+
                 </button></template
               >
+
+
             </v-data-table>
           </template>
         </v-flex>
       </v-layout>
     </v-container>
   </v-layout>
+ 
 
-
-  <GoogleMap/>
+  <GoogleMap v-bind:centerLat = 120.20 v-bind:centerLng = 16.52></GoogleMap>
 
 
 
@@ -75,9 +86,10 @@
 </template>
 
 <script>
+  //lat: 120.48
+  //lng: 16.04
+
 import { functions } from "@/firebase/init";
-
-
 import GoogleMap from "../components/GoogleMap";
 
 export default {
@@ -90,9 +102,8 @@ export default {
 
   components: {   
     GoogleMap   
+    
   },
-
-
 
   data() {
     return {
@@ -104,6 +115,10 @@ export default {
       cityName: [],
       companyNames: ["Bird", "Lime", "Scoot"],
       companyName: [],
+
+      currentLat: 120.48,
+      currentLng: 16.04,
+
       headers: [
         {
           text: "Scooter ID",
@@ -153,18 +168,35 @@ export default {
   },
   methods: {
     
-    openMap(item) {
+    // openMap(item) {
 
   
 
-      window.open(
-        `https://maps.google.com/maps?q=${item.lat},${item.long}`,
-        "_blank"
-      ); 
+    //   window.open(
+    //     `https://maps.google.com/maps?q=${item.lat},${item.long}`,
+    //     "_blank"
+    //   ); 
+    // },
+
+    recenter(item) {
+ 
+
+      console.log(item.lat, "recentered");
+      console.log(item.long, "recentered");
+
+      this.currentLng = item.long;
+      this.currentLat = item.lat;
+
+    
+    
+
     }
 
 
+
   },
+
+  
   async mounted() {
     let rawData = await functions.httpsCallable("retrieveScooters")({});
     this.data = rawData.data;

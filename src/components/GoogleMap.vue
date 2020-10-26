@@ -4,6 +4,7 @@
   
   <div v-if = "markers.length > 0">
       <v-container class="pb-16">
+
     <gmap-map
       :center="center"
       :zoom="10"
@@ -23,6 +24,7 @@
 
    
 </gmap-map>
+
  </v-container>
 
   </div>
@@ -37,10 +39,15 @@ import { functions } from "@/firebase/init"
 
 export default {
   name: "GoogleMap",
+  props: ['centerLat','centerLng'],
+  
   data() {
 
     return {
-      center: {lat: 31.52, lng: 49.8},  
+      //center: {lat: 31.52, lng: 49.8},  
+
+
+     center: {lat: this.centerLat, lng: this.centerLng},
       places: [],
       currentPlace: null,
       markers: []

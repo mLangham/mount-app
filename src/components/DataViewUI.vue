@@ -76,9 +76,6 @@
 import { functions } from "@/firebase/init";
 import GoogleMap from "../components/GoogleMap";
 
-
-import GoogleMap from "../components/GoogleMap";
-
 export default {
   name: "DataViewUI",
   computed: {
@@ -93,7 +90,6 @@ export default {
 
   data() {
     return {
-   
       loader: null,
       search: "",
       data: null,
@@ -159,19 +155,12 @@ export default {
       this.currentLat = item.lat;
       this.componentKey += 1;
     }
-
-
   },
 
   async mounted() {
     let rawData = await functions.httpsCallable("retrieveScooters")({});
     this.data = rawData.data;
-
-    
-
   }
 };
-
-
 </script>
 <style scoped></style>

@@ -1,4 +1,3 @@
-  
 <template>
   <v-btn @click="googleSignUp" rounded class="google">
     <svg
@@ -162,34 +161,14 @@ export default {
   name: "GoogleLoginButton",
   props: ["buttonName"],
   mounted() {
-    auth.getRedirectResult()
-      .then.then(async result => {
-        if (result.credential) {
-          // The signed-in user info.
-          var user = result.user;
-          let userDbResult = await db
-            .collection("users")
-            .doc(user.uid)
-            .get();
-          if (!userDbResult.exists) {
-            await db
-              .collection("users")
-              .doc(user.uid)
-              .set({
-                displayName: user.displayName,
-                email: user.email,
-                uid: user.uid,
-                role: null
-              });
-            await store.dispatch("getUser");
-          }
-          this.$router.push("/");
-        }
-      })
+    auth
+      .getRedirectResult()
+      .then()
       .catch(function(error) {
         // Handle Errors here.
         var errorMessage = error.message;
         alert(errorMessage);
+        this.$router.push("/");
       });
   },
   methods: {

@@ -1,9 +1,9 @@
 <template>
-  <FinishSignUp/>
+  <FinishSignUp />
 </template>
 
 <script>
- import FinishSignUp from "../components/login/FinishSignUpForm";
+import FinishSignUp from "../components/login/FinishSignUpForm";
 
 export default {
   components: {

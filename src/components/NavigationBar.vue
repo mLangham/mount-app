@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar color="#333B52">
-        <v-btn text class="white--text" @click="home()">Mount Locks</v-btn>
+      <v-btn text class="white--text" @click="home()">Mount Locks</v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn

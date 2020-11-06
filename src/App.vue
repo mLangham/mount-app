@@ -2,8 +2,7 @@
   <v-app>
     <navigationBar />
     <router-view />
-     <div id="app">
-  </div>
+    <div id="app"></div>
   </v-app>
 </template>
 

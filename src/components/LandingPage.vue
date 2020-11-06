@@ -11,7 +11,6 @@
               height="190"
             ></v-img>
           </v-flex>
-          
         </v-layout>
       </v-container>
     </div>
@@ -22,6 +21,4 @@
 export default {};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

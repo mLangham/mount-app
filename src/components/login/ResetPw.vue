@@ -1,4 +1,3 @@
-
 <template>
   <v-row
     class="pb-10 px-5 justify-center align-center"
@@ -6,10 +5,8 @@
   >
     <v-container class="mt-5">
       <v-row justify="space-between" class="mx-md-n8 mb-n16">
-        <v-col cols="6" class="pa-0">
-        </v-col>
-        <v-col cols="4">
-        </v-col>
+        <v-col cols="6" class="pa-0"> </v-col>
+        <v-col cols="4"> </v-col>
       </v-row>
     </v-container>
     <v-col cols="12" sm="6" md="4">
@@ -40,10 +37,8 @@
     </v-col>
     <v-container class="mt-5">
       <v-row justify="space-between" class="mx-md-n8 mb-n16">
-        <v-col cols="4" class="pa-0">
-        </v-col>
-        <v-col cols="4">
-        </v-col>
+        <v-col cols="4" class="pa-0"> </v-col>
+        <v-col cols="4"> </v-col>
       </v-row>
     </v-container>
   </v-row>

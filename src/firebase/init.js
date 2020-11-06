@@ -24,7 +24,7 @@ firebase.performance();
 firebase.analytics();
 
 const arrayUnion = array => firebase.firestore.FieldValue.arrayUnion(array);
-const arrayRemove = (array) => firebase.firestore.FieldValue.arrayRemove(array);
+const arrayRemove = array => firebase.firestore.FieldValue.arrayRemove(array);
 
 export default app;
 export { auth, db, functions, arrayUnion, arrayRemove };

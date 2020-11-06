@@ -51,7 +51,7 @@
                   class="form-input"
                   v-model="accountType"
                   :items="accountTypes"
-                  :rules="[(value) => !!value || 'Select a Value.']"
+                  :rules="[value => !!value || 'Select a Value.']"
                   label="City/Company Representative"
                   outlined
                   required
@@ -70,7 +70,7 @@
                   class="form-input"
                   v-model="city"
                   :items="cityList"
-                  :rules="[(value) => !!value || 'Select a Value.']"
+                  :rules="[value => !!value || 'Select a Value.']"
                   label="Select..."
                   outlined
                   required
@@ -82,7 +82,7 @@
                   class="form-input"
                   v-model="company"
                   :items="companyList"
-                  :rules="[(value) => !!value || 'Select a Value.']"
+                  :rules="[value => !!value || 'Select a Value.']"
                   label="Select..."
                   outlined
                   required
@@ -151,38 +151,38 @@ export default {
         name: {
           name: "Name",
           type: "text",
-          rules: [(value) => !!value || "Name is Required."],
+          rules: [value => !!value || "Name is Required."],
           model: null,
           placeholder: "Jane Doe",
-          icon: "mdi-account-outline",
+          icon: "mdi-account-outline"
         },
         email: {
           name: "Email",
           type: "text",
           rules: [
-            (value) => !!value || "Email is Required.",
-            (value) => {
+            value => !!value || "Email is Required.",
+            value => {
               const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
               return pattern.test(value) || "Invalid e-mail.";
-            },
+            }
           ],
           model: null,
           placeholder: "jane@example.com",
-          icon: "mdi-email-outline",
+          icon: "mdi-email-outline"
         },
         password: {
           name: "Password",
           type: "password",
-          rules: [(value) => !!value || "Password is Required."],
+          rules: [value => !!value || "Password is Required."],
           model: null,
           placeholder: "••••••••••••",
-          icon: "mdi-lock-outline",
-        },
-      },
+          icon: "mdi-lock-outline"
+        }
+      }
     };
   },
   components: {
-    GoogleLoginButton,
+    GoogleLoginButton
   },
   methods: {
     appear() {
@@ -204,21 +204,21 @@ export default {
               displayName: this.formFields.name.model,
               email: this.formFields.email.model,
               uid: user.uid,
-              role: "approvalRequested",
+              role: "approvalRequested"
             });
           if (this.accountType == "City Representative") {
             await db.collection("approvals").add({
               toApprove: user.uid,
               userName: this.formFields.name.model,
               representativeType: this.accountType,
-              representing: this.city,
+              representing: this.city
             });
           } else {
             await db.collection("approvals").add({
               toApprove: user.uid,
               userName: this.formFields.name.model,
               representativeType: this.accountType,
-              representing: this.company,
+              representing: this.company
             });
           }
           this.$router.push("/");
@@ -228,7 +228,7 @@ export default {
           var errorMessage = error.message;
           alert(errorMessage);
         });
-    },
+    }
   },
   async mounted() {
     const cityNames = await db
@@ -241,7 +241,7 @@ export default {
       .doc("companyNames")
       .get();
     this.companyList = companyNames.data().companies;
-  },
+  }
 };
 </script>
 

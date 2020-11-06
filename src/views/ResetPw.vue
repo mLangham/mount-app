@@ -3,7 +3,7 @@
 </template>
 
 <script>
- import ResetPw from "../components/login/ResetPw";
+import ResetPw from "../components/login/ResetPw";
 
 export default {
   components: {

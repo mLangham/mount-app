@@ -4,7 +4,6 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import firebase from "firebase/app";
-import "firebaseui/dist/firebaseui.css";
 import vuetify from "./plugins/vuetify";
 import * as VueGoogleMaps from "vue2-google-maps";
 
@@ -28,7 +27,7 @@ firebase.auth().onAuthStateChanged(async () => {
       router,
       store,
       vuetify,
-      render: (h) => h(App),
+      render: h => h(App)
     }).$mount("#app");
   }
 });

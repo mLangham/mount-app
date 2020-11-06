@@ -25,11 +25,14 @@ const actions = {
     if (!user) {
       return;
     }
-    var raid = await db.collection("users").doc(user.uid).get();
-    if (raid.exists){
+    var raid = await db
+      .collection("users")
+      .doc(user.uid)
+      .get();
+    if (raid.exists) {
       context.commit("setUser", raid.data());
     } else {
-      context.commit("setUser", null);
+      context.commit("setUser", { role: null });
     }
   },
   logOut: async context => {

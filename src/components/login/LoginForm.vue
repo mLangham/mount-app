@@ -1,6 +1,4 @@
-// Sign Up      Log In 
-
-// Actual log in page 
+// Sign Up Log In // Actual log in page
 <template>
   <v-row
     class="pb-10 px-5 justify-center align-center"
@@ -9,7 +7,8 @@
     <v-row justify="center" style="width: 100vw;">
       <v-col v-if="!this.renderLogin" cols="12" sm="6" md="4">
         <v-row class="justify-space-between">
-          <v-btn color="#333B52"
+          <v-btn
+            color="#333B52"
             style="text-transform: none; width: 40%; height: 72px; font-size: 2em; z-index: 1;"
             class="align-self-center white--text ma-3"
             rounded
@@ -17,7 +16,8 @@
             @click="$router.push(`/signup`)"
             >Sign Up</v-btn
           >
-          <v-btn color="#333B52"
+          <v-btn
+            color="#333B52"
             style="text-transform: none; width: 40%; height: 72px; font-size: 2em;"
             class="align-self-center white--text ma-3"
             rounded
@@ -79,7 +79,8 @@
                 outlined
               ></v-text-field>
             </v-form>
-            <v-btn color="#333B52"
+            <v-btn
+              color="#333B52"
               style="text-transform: none; width: 70%;"
               class="mb-6 align-self-center white--text"
               rounded
@@ -110,10 +111,8 @@
     </v-row>
     <v-container class="mt-5">
       <v-row justify="space-between" class="mx-md-n8 mb-n16">
-        <v-col cols="4" class="pa-0">
-        </v-col>
-        <v-col cols="4">
-        </v-col>
+        <v-col cols="4" class="pa-0"> </v-col>
+        <v-col cols="4"> </v-col>
       </v-row>
     </v-container>
   </v-row>
@@ -140,12 +139,13 @@ export default {
     };
   },
   components: {
-    GoogleLoginButton,
+    GoogleLoginButton
   },
   methods: {
     async login() {
       if (!this.$refs.form.validate()) return;
-      auth.signInWithEmailAndPassword(this.email, this.password)
+      auth
+        .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           this.$router.push("/");
         })

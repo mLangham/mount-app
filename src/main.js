@@ -20,35 +20,15 @@ Vue.config.productionTip = false;
 // initially sets app to null
 var app = null;
 
-/** on user login/logout sets app variable
- *  sets userType on sign up based on URL (see store)
- */
+// on user login/logout sets app variable
 firebase.auth().onAuthStateChanged(async () => {
   if (!app) {
-    if (document.referrer.includes("citySignUp")) {
-      await store.dispatch("createCityUser");
-      new Vue({
-        router,
-        store,
-        vuetify,
-        render: h => h(App)
-      }).$mount("#app");
-    } else if (document.referrer.includes("companySignUp")) {
-      await store.dispatch("createCompanyUser");
-      new Vue({
-        router,
-        store,
-        vuetify,
-        render: h => h(App)
-      }).$mount("#app");
-    } else {
-      await store.dispatch("loginUser");
-      new Vue({
-        router,
-        store,
-        vuetify,
-        render: h => h(App)
-      }).$mount("#app");
-    }
+    await store.dispatch("getUser");
+    new Vue({
+      router,
+      store,
+      vuetify,
+      render: (h) => h(App),
+    }).$mount("#app");
   }
 });

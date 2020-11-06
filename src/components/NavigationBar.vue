@@ -48,7 +48,7 @@ export default {
   methods: {
     async signOut() {
       await this.$store.dispatch("logOut");
-      this.$router.push("/");
+      this.$router.push("/").catch(() => {});
     },
     signIn() {
       this.$router.push("/login");

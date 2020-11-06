@@ -1,13 +1,13 @@
 <template>
-  <LoginUI :selection="true" />
+   <LoginForm />
 </template>
 
 <script>
-import LoginUI from "../components/LoginUI";
+import LoginForm from "../components/login/LoginForm";
 
 export default {
   components: {
-    LoginUI
+    LoginForm
   }
 };
 </script>

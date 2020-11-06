@@ -1,13 +1,13 @@
 <template>
-  <LoginUI />
+  <ResetPw />
 </template>
 
 <script>
-import LoginUI from "../components/LoginUI";
+ import ResetPw from "../components/login/ResetPw";
 
 export default {
   components: {
-    LoginUI
+    ResetPw
   }
 };
 </script>

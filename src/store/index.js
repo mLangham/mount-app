@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import firebase from "firebase/app";
-import { functions } from "@/firebase/init.js";
+import { db } from "@/firebase/init.js";
 
 Vue.use(Vuex);
 
@@ -20,74 +20,17 @@ const mutations = {
 };
 
 const actions = {
-  loginUser: async context => {
-    const user = firebase.auth().currentUser;
-    if (!user) {
-      return;
-    }
-    var raid = await functions.httpsCallable("getUserData")({
-      uid: user.uid
-    });
-    // if user entry doesnt exist, set user to error state
-    if (!raid.data) {
-      context.commit("setUser", "error");
-    } else {
-      context.commit("setUser", raid.data);
-    }
-  },
-  createCityUser: async context => {
-    const user = firebase.auth().currentUser;
-    if (!user) {
-      return;
-    }
-    var raid = await functions.httpsCallable("getUserData")({
-      uid: user.uid
-    });
-    if (!raid.data) {
-      await functions.httpsCallable("createCityUser")({
-        uid: user.uid,
-        displayName: user.displayName,
-        email: user.email
-      });
-      raid = await functions.httpsCallable("getUserData")({
-        uid: user.uid
-      });
-      context.commit("setUser", raid.data);
-    } else {
-      context.commit("setUser", raid.data);
-    }
-  },
-  createCompanyUser: async context => {
-    const user = firebase.auth().currentUser;
-    if (!user) {
-      return;
-    }
-    var raid = await functions.httpsCallable("getUserData")({
-      uid: user.uid
-    });
-    if (!raid.data) {
-      await functions.httpsCallable("createCompanyUser")({
-        uid: user.uid,
-        displayName: user.displayName,
-        email: user.email
-      });
-      raid = await functions.httpsCallable("getUserData")({
-        uid: user.uid
-      });
-      context.commit("setUser", raid.data);
-    } else {
-      context.commit("setUser", raid.data);
-    }
-  },
   getUser: async context => {
     const user = firebase.auth().currentUser;
     if (!user) {
       return;
     }
-    var raid = await functions.httpsCallable("getUserData")({
-      uid: user.uid
-    });
-    context.commit("setUser", raid.data);
+    var raid = await db.collection("users").doc(user.uid).get();
+    if (raid.exists){
+      context.commit("setUser", raid.data());
+    } else {
+      context.commit("setUser", null);
+    }
   },
   logOut: async context => {
     await firebase.auth().signOut();

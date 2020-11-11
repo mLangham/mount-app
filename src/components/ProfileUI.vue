@@ -66,12 +66,7 @@
                           v-text="item.userName"
                         ></v-list-item-title>
                         <v-list-item-subtitle
-                          v-if="item.cityName"
-                          v-text="item.cityName"
-                        ></v-list-item-subtitle>
-                        <v-list-item-subtitle
-                          v-else
-                          v-text="item.companyName"
+                          v-text="item.representing"
                         ></v-list-item-subtitle>
                       </v-list-item-content>
                       <v-list-item-action>

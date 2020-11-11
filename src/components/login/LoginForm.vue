@@ -5,8 +5,8 @@
     style="min-height: 100vh;"
   >
     <v-row justify="center" style="width: 100vw;">
-      <v-col v-if="!this.renderLogin" cols="12" sm="6" md="4">
-        <v-row class="justify-space-between">
+      <!-- <v-col v-if="!this.renderLogin" cols="12" sm="6" md="4"> -->
+      <!-- <v-row class="justify-space-between">
           <v-btn
             color="#333B52"
             style="text-transform: none; width: 40%; height: 72px; font-size: 2em; z-index: 1;"
@@ -25,9 +25,10 @@
             @click="renderLogin = !renderLogin"
             >Log In</v-btn
           >
-        </v-row>
-      </v-col>
-      <v-col v-else cols="12" sm="6" md="4" lg="3">
+        </v-row> -->
+      <!-- </v-col> -->
+
+      <v-col cols="12" sm="6" md="4" lg="3">
         <v-card>
           <v-row class="justify-center">
             <v-card-title
@@ -102,7 +103,7 @@
             left
             small
             color="#333B52"
-            @click="renderLogin = !renderLogin"
+            @click="$router.push(`/signup`)"
           >
             <v-icon small>mdi-arrow-left</v-icon>
           </v-btn>

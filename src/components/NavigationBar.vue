@@ -2,8 +2,11 @@
   <div>
     <v-toolbar color="#333B52">
       <v-btn text class="white--text" @click="home()">Mount Locks</v-btn>
+
       <v-spacer></v-spacer>
+
       <v-toolbar-items>
+        <!-- if user is logged in -->
         <v-btn
           v-if="user != 'error' && user != null"
           text
@@ -18,17 +21,34 @@
           class="white--text"
           >Profile</v-btn
         >
-        <v-btn icon>
-          <v-icon
-            v-if="user != 'error' && user != null"
-            @click="signOut()"
-            class="white--text"
-            >mdi-logout-variant</v-icon
+
+        <v-icon
+          v-if="user != 'error' && user != null"
+          @click="signOut()"
+          class="white--text"
+          >mdi-logout-variant</v-icon
+        >
+
+        <!-- if user is not approved but logged in -->
+
+        <div v-else-if="user.role == `approvalRequested`"></div>
+
+        <!-- if user is not logged in -->
+
+        <div v-else>
+          <v-btn
+            color="#FFFFFF"
+            class="align-self-center #333B52--text ma-3"
+            @click="$router.push(`/signup`)"
+            >Sign Up
+          </v-btn>
+          <v-btn
+            color="#333B52"
+            class="align-self-center white--text ma-3"
+            @click="$router.push(`/login`)"
+            >Log In</v-btn
           >
-          <v-icon color="white" v-else @click="signIn()"
-            >mdi-login-variant</v-icon
-          >
-        </v-btn>
+        </div>
       </v-toolbar-items>
     </v-toolbar>
   </div>

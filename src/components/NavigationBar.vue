@@ -6,32 +6,27 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <!-- if user is logged in -->
-        <v-btn
-          v-if="user != 'error' && user != null"
-          text
-          @click="dataview()"
-          class="white--text"
-          >Scooter Info</v-btn
-        >
-        <v-btn
-          v-if="user != 'error' && user != null"
-          text
-          @click="profile()"
-          class="white--text"
-          >Profile</v-btn
-        >
+        <div v-if="user">
+          <!-- if user is logged in -->
+          <v-btn
+            v-if="user.role != 'approvalRequested'"
+            text
+            @click="dataview()"
+            class="white--text"
+            >Scooter Info</v-btn
+          >
+          <v-btn
+            v-if="user.role != 'approvalRequested'"
+            text
+            @click="profile()"
+            class="white--text"
+            >Profile</v-btn
+          >
+        </div>
 
-        <v-icon
-          v-if="user != 'error' && user != null"
-          @click="signOut()"
-          class="white--text"
+        <v-icon v-if="user != null" @click="signOut()" class="white--text"
           >mdi-logout-variant</v-icon
         >
-
-        <!-- if user is not approved but logged in -->
-
-        <div v-else-if="user.role == `approvalRequested`"></div>
 
         <!-- if user is not logged in -->
 

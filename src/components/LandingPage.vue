@@ -4,13 +4,15 @@
       <v-container>
         <v-layout text-center wrap>
           <v-flex xs12>
-            <div v-if="user != 'error' && user != null">
-              Hello, welcome to Mount
-            </div>
+            <div v-if="user">
+              <div v-if="user.role == 'approvalRequested'">
+                Not Approved yet
+              </div>
 
-            <!-- <div v-else-if ="user.role != 'admin'">
-              You are not approved yet ??????
-            </div> -->
+              <div v-else>
+                Hello, welcome to Mount
+              </div>
+            </div>
 
             <v-img
               v-else

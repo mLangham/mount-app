@@ -25,8 +25,8 @@
                 ></v-text-field>
               </v-flex>
             </v-layout>
-            <div v-if="role != 'admin' && role != 'rejected'">
-              <v-layout v-if="role" row>
+            <div v-if="role != 'admin'">
+              <v-layout row>
                 <v-flex xs12>
                   <v-text-field
                     v-if="cityName"
@@ -42,28 +42,6 @@
                   ></v-text-field>
                 </v-flex>
               </v-layout>
-              <v-layout v-else row>
-                <v-flex xs12>
-                  <v-select
-                    v-if="userType == 'city'"
-                    v-model="cityName"
-                    :items="cityList"
-                    label="Cities"
-                  ></v-select>
-                  <v-select
-                    v-else
-                    v-model="companyName"
-                    :items="companyList"
-                    label="Companies"
-                  ></v-select>
-                </v-flex>
-              </v-layout>
-              <v-btn
-                v-if="!uid && role != 'rejected' && role != 'approved'"
-                color="#333B52"
-                @click="requestApproval"
-                >Request Approval</v-btn
-              >
             </div>
           </v-form>
           <v-layout
@@ -123,7 +101,7 @@
 </template>
 
 <script>
-import { functions } from "../firebase/init";
+import { db, functions } from "../firebase/init";
 export default {
   name: "ProfileUI",
   data() {
@@ -133,10 +111,9 @@ export default {
       email: null,
       role: null,
       cityName: null,
-      cityList: ["Carbondale", "Providence", "Vail"],
+      cityList: [],
       companyName: null,
-      companyList: ["Bird", "Lime", "Scoot"],
-      userType: null,
+      companyList: [],
       requests: null
     };
   },
@@ -147,29 +124,39 @@ export default {
   },
   async mounted() {
     this.role = this.user.role;
+    const cityNames = await db
+      .collection("adminData")
+      .doc("cityNames")
+      .get();
+    this.cityList = cityNames.data().cities;
+    const companyNames = await db
+      .collection("adminData")
+      .doc("companyNames")
+      .get();
+    this.companyList = companyNames.data().companies;
     if (this.uid) {
-      let findUser = await functions.httpsCallable("getUserData")({
-        uid: this.uid
-      });
-      if (!findUser.data) {
+      let findUser = await db
+        .collection("users")
+        .doc(this.uid)
+        .get();
+      if (!findUser.exists) {
         this.$router.push({
           name: "profile"
         });
       } else {
-        this.name = findUser.data.displayName;
-        this.email = findUser.data.email;
+        this.name = findUser.data().displayName;
+        this.email = findUser.data().email;
       }
     } else {
       this.name = this.user.displayName;
       this.email = this.user.email;
-      this.userType = this.user.userType;
       this.companyName = this.user.companyName;
       this.cityName = this.user.cityName;
     }
     if (this.role == "admin") {
       let requests = [];
-      let reqs = await functions.httpsCallable("retrieveRequests")({});
-      reqs.data.forEach(element => {
+      let reqs = await db.collection("approvals").get();
+      reqs.forEach(element => {
         if (!element.rejected) {
           requests.push(element);
         }
@@ -178,24 +165,6 @@ export default {
     }
   },
   methods: {
-    async requestApproval() {
-      if (this.userType == "city") {
-        await functions.httpsCallable("requestApproval")({
-          uid: this.user.uid,
-          name: this.user.displayName,
-          cityName: this.cityName
-        });
-      } else {
-        await functions.httpsCallable("requestApproval")({
-          uid: this.user.uid,
-          name: this.user.displayName,
-          companyName: this.companyName
-        });
-      }
-      this.$store.dispatch("getUser").then(() => {
-        this.$router.push("/");
-      });
-    },
     async viewProfile(uid) {
       this.$router.push("/profile/" + uid);
     },

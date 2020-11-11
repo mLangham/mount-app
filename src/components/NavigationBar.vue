@@ -5,24 +5,21 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn
-          v-if="user != 'error' && user != null"
+          v-if="user != 'approvalRequested' && user != null"
           text
           @click="dataview()"
           class="white--text"
           >Scooter Info</v-btn
         >
         <v-btn
-          v-if="user != 'error' && user != null"
+          v-if="user != 'approvalRequested' && user != null"
           text
           @click="profile()"
           class="white--text"
           >Profile</v-btn
         >
         <v-btn icon>
-          <v-icon
-            v-if="user != 'error' && user != null"
-            @click="signOut()"
-            class="white--text"
+          <v-icon v-if="user != null" @click="signOut()" class="white--text"
             >mdi-logout-variant</v-icon
           >
           <v-icon color="white" v-else @click="signIn()"

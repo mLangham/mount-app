@@ -12,19 +12,19 @@
             v-if="user.role != 'approvalRequested'"
             text
             @click="dataview()"
-            class="white--text"
+            class="white--text ma-3"
             >Scooter Info</v-btn
           >
           <v-btn
             v-if="user.role != 'approvalRequested'"
             text
             @click="profile()"
-            class="white--text"
+            class="white--text ma-3"
             >Profile</v-btn
           >
         </div>
 
-        <v-icon v-if="user != null" @click="signOut()" class="white--text"
+        <v-icon v-if="user != null" @click="signOut()" class="white--text ma-3"
           >mdi-logout-variant</v-icon
         >
 

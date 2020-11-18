@@ -1,4 +1,3 @@
-// Sign Up Log In // Actual log in page
 <template>
   <v-row
     class="pb-10 px-5 justify-center align-center"
@@ -103,7 +102,7 @@
             left
             small
             color="#333B52"
-            @click="$router.push(`/signup`)"
+            @click="$router.go(-1)"
           >
             <v-icon small>mdi-arrow-left</v-icon>
           </v-btn>

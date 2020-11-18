@@ -113,7 +113,7 @@
               left
               small
               color="#333B52"
-              @click="$router.push(`/login`)"
+              @click="$router.go(-1)"
             >
               <v-icon small>mdi-arrow-left</v-icon>
             </v-btn>

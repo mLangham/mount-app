@@ -2,30 +2,48 @@
   <div>
     <v-toolbar color="#333B52">
       <v-btn text class="white--text" @click="home()">Mount Locks</v-btn>
+
       <v-spacer></v-spacer>
+
       <v-toolbar-items>
-        <v-btn
-          v-if="user != 'approvalRequested' && user != null"
-          text
-          @click="dataview()"
-          class="white--text"
-          >Scooter Info</v-btn
-        >
-        <v-btn
-          v-if="user != 'approvalRequested' && user != null"
-          text
-          @click="profile()"
-          class="white--text"
-          >Profile</v-btn
-        >
-        <v-btn icon>
-          <v-icon v-if="user != null" @click="signOut()" class="white--text"
-            >mdi-logout-variant</v-icon
+        <div v-if="user">
+          <!-- if user is logged in -->
+          <v-btn
+            v-if="user.role != 'approvalRequested'"
+            text
+            @click="dataview()"
+            class="white--text ma-3"
+            >Scooter Info</v-btn
           >
-          <v-icon color="white" v-else @click="signIn()"
-            >mdi-login-variant</v-icon
+          <v-btn
+            v-if="user.role != 'approvalRequested'"
+            text
+            @click="profile()"
+            class="white--text ma-3"
+            >Profile</v-btn
           >
-        </v-btn>
+        </div>
+
+        <v-icon v-if="user != null" @click="signOut()" class="white--text ma-3"
+          >mdi-logout-variant</v-icon
+        >
+
+        <!-- if user is not logged in -->
+
+        <div v-else>
+          <v-btn
+            color="#FFFFFF"
+            class="align-self-center #333B52--text ma-3"
+            @click="$router.push(`/signup`)"
+            >Sign Up
+          </v-btn>
+          <v-btn
+            color="#333B52"
+            class="align-self-center white--text ma-3"
+            @click="$router.push(`/login`)"
+            >Log In</v-btn
+          >
+        </div>
       </v-toolbar-items>
     </v-toolbar>
   </div>

@@ -150,10 +150,13 @@ export default {
     }
     if (this.role == "admin") {
       let requests = [];
+
+      // reding  collection ??????????
       let reqs = await db.collection("approvals").get();
+
       reqs.forEach(element => {
-        if (!element.rejected) {
-          requests.push(element);
+        if (!element.data().rejected) {
+          requests.push(element.data());
         }
       });
       this.requests = requests;

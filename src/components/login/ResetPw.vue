@@ -28,7 +28,13 @@
               placeholder="jone@example.com"
             ></v-text-field>
             <v-divider></v-divider>
-            <v-btn v-btn block color="info white--text" @click="forgotPW">
+            <v-btn
+              color="#333B52"
+              v-btn
+              block
+              class="white--text"
+              @click="forgotPW"
+            >
               Reset Password
             </v-btn>
           </v-container>

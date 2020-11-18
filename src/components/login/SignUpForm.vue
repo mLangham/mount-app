@@ -131,6 +131,7 @@
 </template>
 
 <script>
+import store from "@/store";
 import GoogleLoginButton from "@/components/login/GoogleLoginButton.vue";
 import { db, auth } from "@/firebase/init.js";
 export default {
@@ -221,8 +222,12 @@ export default {
               representing: this.company
             });
           }
-          this.$router.push("/");
+
+          store.dispatch("getUser").then(() => {
+            this.$router.push("/");
+          });
         })
+
         .catch(function(error) {
           // Handle Errors here.
           var errorMessage = error.message;

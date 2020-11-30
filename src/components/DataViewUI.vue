@@ -25,7 +25,7 @@
                 </v-flex>
                 <v-flex v-if="user.cityName || user.role == 'admin'" mx-1>
                   <v-select
-                    :items="companyNames"
+                    :items="companymNames"
                     v-model="companyName"
                     label="Company Name"
                     multiple
@@ -60,6 +60,11 @@
               </v-data-table>
             </template>
           </v-flex>
+          <vue-json-to-csv :json-data="this.data">
+            <v-btn color="#333B52" class="align-self-right white--text">
+              Download CSV
+            </v-btn>
+          </vue-json-to-csv>
         </v-layout>
       </v-container>
     </v-layout>
@@ -73,6 +78,7 @@
 </template>
 
 <script>
+import VueJsonToCsv from "vue-json-to-csv";
 import { functions } from "@/firebase/init";
 import GoogleMap from "../components/GoogleMap";
 
@@ -85,7 +91,8 @@ export default {
   },
 
   components: {
-    GoogleMap
+    GoogleMap,
+    VueJsonToCsv
   },
 
   data() {
